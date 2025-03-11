@@ -1,147 +1,142 @@
 # Factory-Management-System
 ### Workflow Chart
 
-
-Project Setup & Planning
+### Project Setup & Planning
 
 │
 
 ├── 1. Repository & Code Standards
 
-│ ├── Initialize Git repository
+│    ├── Initialize Git repository
 
-│ ├── Define coding style (ESLint, Prettier)
+│    ├── Define coding style (ESLint, Prettier)
 
-│ └── Plan branch management (feature branches, pull requests)
-
-│
-
-├── 2. Backend Module (Node.js, Express.js, MongoDB Local)
-
-│ ├── Server Setup
-
-│ │ ├── Initialize project (npm init)
-
-│ │ ├── Install dependencies (express, mongoose, cors, dotenv, morgan, jsonwebtoken, etc.)
-
-│ │ ├── Create basic server (e.g., GET /health) and test with Postman
-
-│ │ └── Setup environment variables (using .env)
-
-│ │
-
-│ ├── Database Integration
-
-│ │ ├── Install & Configure local MongoDB
-
-│ │ ├── Create Mongoose models (User, Accounting, Inventory, Transactions, Images)
-
-│ │ └── Ensure proper connection error handling
-
-│ │
-
-│ ├── API Routes & Controllers
-
-│ │ ├── Define route modules (e.g., routes/accounting.js, routes/auth.js)
-
-│ │ ├── Create controller functions (business logic, clean separation)
-
-│ │ └── Implement middleware (error handling, logging, authentication)
-
-│ │
-
-│ ├── Authentication Module
-
-│ │ ├── Choose JWT-based auth (or session-based if preferred)
-
-│ │ ├── Create login/register routes
-
-│ │ └── Implement token verification middleware
-
-│ │
-
-│ └── Testing & Debugging
-
-│ ├── Write unit tests (using Jest, supertest)
-
-│ └── Perform integration tests on API endpoints
+│    └── Plan branch management (feature branches, pull requests)
 
 │
 
-├── 3. Frontend Module (React with Vite, Redux Toolkit, Tailwind CSS)
+├── 2. Backend Module (Node.js, Express, Local MongoDB)
 
-│ ├── Project Initialization
+│    ├── Server Setup
 
-│ │ ├── Initialize Vite project with React (JavaScript)
+│    │     ├── npm init and install dependencies (express, mongoose, cors, dotenv, morgan, jsonwebtoken, bcryptjs, etc.)
 
-│ │ ├── Install dependencies (react, redux toolkit, react-redux, axios, react-router-dom, tailwindcss)
+│    │     ├── Create basic server (e.g., GET /health) and test with Postman
 
-│ │ └── Configure Tailwind CSS
+│    │     └── Setup environment variables (.env)
 
-│ │
+│    │
 
-│ ├── UI Components & Pages
+│    ├── Database Integration
 
-│ │ ├── Design UI inspired by shadcn (minimal, clean, monochrome)
+│    │     ├── Install & configure local MongoDB
 
-│ │ ├── Create components: Sidebar, Dashboard, Transaction Table, Image Upload Section
+│    │     ├── Create Mongoose models (User, Accounting, Inventory, Transactions, Images)
 
-│ │ └── Organize folder structure (components, pages, assets)
+│    │     └── Implement robust connection and error handling
 
-│ │
+│    │
 
-│ ├── State Management & API Integration
+│    ├── API Routes & Controllers
 
-│ │ ├── Setup Redux Toolkit (create slices for accounting, inventory, user auth, etc.)
+│    │     ├── Organize routes (auth, accounting, inventory, uploads)
 
-│ │ ├── Create an Axios instance for API calls (with interceptors for errors/auth)
+│    │     ├── Create controller functions for business logic
 
-│ │ └── Use async thunks for handling API requests
+│    │     └── Implement middleware for error handling, logging, and JWT-based authentication
 
-│ │
+│    │
 
-│ ├── Routing & Navigation
+│    ├── Authentication Module (JWT)
 
-│ │ ├── Set up React Router for navigation between pages (Dashboard, Accounting, etc.)
+│    │     ├── Create login and register routes
 
-│ │ └── Ensure consistent navigation and UI flow
+│    │     ├── Use bcrypt for password hashing
 
-│ │
+│    │     └── Generate and verify JWT tokens
 
-│ └── Testing & Debugging
+│    │
 
-│ ├── Component testing (using React Testing Library)
+│    └── Testing & Debugging
 
-│ ├── Integration testing (ensuring API calls work and data flows correctly)
+│          ├── Write unit tests (Jest, Supertest)
 
-│ └── Validate responsive design and UI/UX consistency
+│          └── Conduct integration testing on API endpoints
+
+│
+
+├── 3. Frontend Module (Vite React, Redux Toolkit, Axios, Tailwind CSS, shadcn UI)
+
+│    ├── Project Initialization
+
+│    │     ├── Initialize Vite project with React (JavaScript)
+
+│    │     ├── Install dependencies (react, react-dom, redux toolkit, react-redux, axios, react-router-dom, tailwindcss)
+
+│    │     └── Configure Tailwind CSS
+
+│    │
+
+│    ├── UI Components & Pages
+
+│    │     ├── \*\*Integrate shadcn UI\*\* components (install packages and follow documentation)
+
+│    │     ├── Build minimal and clean components: Sidebar, Dashboard, Transaction Table, Image Upload
+
+│    │     └── Organize project structure (components, pages, hooks, services)
+
+│    │
+
+│    ├── State Management & API Integration
+
+│    │     ├── Setup Redux Toolkit slices (auth, accounting, etc.)
+
+│    │     ├── Create an Axios instance with interceptors for error handling and token injection
+
+│    │     └── Implement async thunks for API calls
+
+│    │
+
+│    ├── Routing & Navigation
+
+│    │     ├── Set up React Router for different pages (Dashboard, Accounting, etc.)
+
+│    │     └── Ensure smooth UI flow and consistent navigation
+
+│    │
+
+│    └── Testing & Debugging
+
+│          ├── Write component tests (React Testing Library)
+
+│          └── Perform integration testing of API data flow and UI interactions
 
 │
 
 ├── 4. Integration Phase
 
-│ ├── Connect Frontend & Backend
+│    ├── Connect Frontend & Backend
 
-│ │ ├── Integrate Axios calls with Express routes
+│    │     ├── Use Axios in frontend to call Express endpoints
 
-│ │ ├── Verify data exchange (accounting records, image uploads)
+│    │     ├── Verify data exchange (accounting records, image uploads, user authentication)
 
-│ │ └── Debug integration errors (CORS, API response handling)
+│    │     └── Debug integration issues (CORS, token management)
 
-│ │
+│    │
 
-│ └── End-to-End Testing
+│    └── End-to-End Testing
 
-│ ├── Run full system tests (using tools like Cypress if needed)
+│          ├── Run full system tests (using Cypress or similar, if needed)
 
-│ └── Validate user flows (login, data entry, image uploads)
+│          └── Validate complete user flows
 
 │
 
 └── 5. Deployment & Final Testing (Local)
 
-├── Create scripts to run both backend and frontend (e.g., concurrently)
+     ├── Configure scripts to run backend and frontend concurrently
 
-├── Configure environment variables for local development
+     ├── Set up environment variables for local development
 
-└── Final verification and debugging before client handoff
+     └── Final testing and debugging before any additional module integrations
