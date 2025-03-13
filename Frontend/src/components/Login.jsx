@@ -1,14 +1,22 @@
-import React from "react";
+// src/components/Login.jsx
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 
-function Login() {
+const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const auth = useSelector((state) => state.auth);
+  const { status, error } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   const onSubmit = async (data) => {
     const result = await dispatch(loginUser(data));
@@ -25,7 +33,7 @@ function Login() {
         className="bg-white p-8 rounded shadow-md w-full max-w-md"
       >
         <h2 className="text-2xl mb-6 text-center font-bold">Login</h2>
-        {auth.error && <p className="text-red-500 mb-4">{auth.error}</p>}
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="mb-4">
           <label className="block mb-2">Email</label>
           <input
@@ -46,7 +54,7 @@ function Login() {
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
         >
-          {auth.status === "loading" ? "Logging in..." : "Login"}
+          {status === "loading" ? "Logging in..." : "Login"}
         </button>
         <p className="mt-4 text-center">
           Don't have an account?{" "}
@@ -57,6 +65,6 @@ function Login() {
       </form>
     </div>
   );
-}
+};
 
 export default Login;

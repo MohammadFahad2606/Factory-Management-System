@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import authRoutes from './routes/auth.js';
 import errorHandler from './middleware/errorMiddleware.js';
-
+import inventoryRoutes from './routes/inventory.js';
 dotenv.config();
 connectDB();
 
@@ -19,7 +19,7 @@ app.use(morgan('dev'));
 app.get('/health', (req, res) => res.send('API is running'));
 
 app.use('/api/auth', authRoutes);
-
+app.use('/api/inventory', inventoryRoutes);
 app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

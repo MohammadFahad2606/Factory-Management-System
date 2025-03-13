@@ -1,14 +1,22 @@
-import React from "react";
+// src/components/Register.jsx
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../redux/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 
-function Register() {
+const Register = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const auth = useSelector((state) => state.auth);
+  const { status, error } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   const onSubmit = async (data) => {
     const result = await dispatch(registerUser(data));
@@ -25,7 +33,7 @@ function Register() {
         className="bg-white p-8 rounded shadow-md w-full max-w-md"
       >
         <h2 className="text-2xl mb-6 text-center font-bold">Register</h2>
-        {auth.error && <p className="text-red-500 mb-4">{auth.error}</p>}
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="mb-4">
           <label className="block mb-2">Username</label>
           <input
@@ -54,7 +62,7 @@ function Register() {
           type="submit"
           className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600"
         >
-          {auth.status === "loading" ? "Registering..." : "Register"}
+          {status === "loading" ? "Registering..." : "Register"}
         </button>
         <p className="mt-4 text-center">
           Already have an account?{" "}
@@ -65,6 +73,6 @@ function Register() {
       </form>
     </div>
   );
-}
+};
 
 export default Register;
